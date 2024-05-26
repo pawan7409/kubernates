@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gettasksmicro 
+  labels:
+    name: gettasksmicro 
+spec:
+  containers:
+  - name: devopsinsider-gettaskmicro
+    image: pawan7409/microgettask
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+    - containerPort: 8000
+    env:
+      - name: CONNECTION_STRING
+        value: "Driver={ODBC Driver 17 for SQL Server};Server=tcp:seerver345657.database.windows.net,1433;Database=sql7869575;Uid=VM01;Pwd=Rjil@12345678;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"

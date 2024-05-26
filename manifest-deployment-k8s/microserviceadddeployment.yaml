@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: add-profile
+  labels:
+    app: addtask-profile
+spec:
+  replicas: 1
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - addtask-profile
+  strategy:
+    rollingUpdate :
+      maxSurge : 25%
+      maxUnavailable : 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      labels: 
+        app: addtask-profile
+      name: profile-pod 
+    spec: 
+       containers:
+        - name: microui-profile
+          image: pawan7409/microaddtask
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8000
+          env:
+            - name: CONNECTION_STRING
+              value: "Driver={ODBC Driver 17 for SQL Server};Server=tcp:server345668.database.windows.net,1433;Database=storage34657;Uid=VM01;Pwd=Rjil@12345678;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+            
+          

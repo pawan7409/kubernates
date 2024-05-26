@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: netflix-pod
+  labels:
+    app: netflix-clone
+  namespace: default
+spec:
+  containers:
+  - name: bastion-container
+    image: devopsinsiders/netflix-clone
+    ports:
+    - containerPort: 80
+             

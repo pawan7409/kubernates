@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: netflix-deployment  # Corrected spelling
+  namespace: default
+  labels:  # Corrected from 'lebels'
+    app: netflix-clone
+spec: 
+  replicas: 3
+  selector: 
+    matchExpressions:
+      - key: app
+        operator: In
+        values: 
+          - netflix-clone
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      name: netflix-clone-devopspod
+      labels: 
+        app: netflix-clone
+    spec:
+      containers:
+      - name: netflix-container
+        image: devopsinsiders/netflix-clone 
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+

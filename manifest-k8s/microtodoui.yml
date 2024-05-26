@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: microui
+  labels:
+    name: microui
+spec:
+  containers:
+  - name: microui
+    image: pawan7409/microtodoui:v2
+    ports:
+      - containerPort: 80

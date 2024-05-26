@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: mircotodiui-profile
+  labels:
+    app: profile
+spec:
+  replicas: 1
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - profile
+  strategy:
+    rollingUpdate :
+      maxSurge : 25%
+      maxUnavailable : 25%
+    type: RollingUpdate
+
+  template:
+    metadata:
+      labels: 
+        app: profile 
+      name: profile-pod 
+    spec: 
+       containers:
+        - name: microui-profile
+          image: pawan7409/microtodoui:v2
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
+            
+          
+ 

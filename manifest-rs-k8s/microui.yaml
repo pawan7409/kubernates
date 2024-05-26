@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ReplicaSet
+metadata:
+  labels: replicaset
+  name: microui-replicaset
+spec:
+  replicas: 4
+  selector:
+    matchExpressions:
+    - key: replicatset
+      operator:
+
